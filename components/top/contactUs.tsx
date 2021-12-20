@@ -24,7 +24,7 @@ import {
     MdFacebook,
     MdOutlineEmail,
   } from 'react-icons/md';
-  import { BsGithub, BsDiscord, BsPerson } from 'react-icons/bs';
+  import { BsGithub, BsDiscord, BsPerson, BsInstagram, BsLine } from 'react-icons/bs';
   
 export default function ContactUs () {
   return (
@@ -97,15 +97,15 @@ export default function ContactUs () {
                       size="lg"
                       isRound={true}
                       _hover={{ bg: '#0D74FF' }}
-                      icon={<BsGithub size="28px" />}
+                      icon={<BsLine size="28px" />}
                     />
                     <IconButton
-                      aria-label="discord"
+                      aria-label="Instagram"
                       variant="ghost"
                       size="lg"
                       isRound={true}
                       _hover={{ bg: '#0D74FF' }}
-                      icon={<BsDiscord size="28px" />}
+                      icon={<BsInstagram size="28px" />}
                     />
                   </HStack>
                 </Box>

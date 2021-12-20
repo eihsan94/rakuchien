@@ -12,7 +12,7 @@ import {
     useColorModeValue,
   } from '@chakra-ui/react';
   import { ReactNode } from 'react';
-  import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+  import { FaFacebook, FaInstagram, FaLine, FaTwitter, FaYoutube } from 'react-icons/fa';
   import { BiMailSend } from 'react-icons/bi';
 import Logo from '../images/logo';
   
@@ -72,11 +72,11 @@ import Logo from '../images/logo';
                 © 2021 Rakuchien All rights reserved
               </Text>
               <Stack direction={'row'} spacing={6}>
-                <SocialButton label={'Twitter'} href={'#'}>
-                  <FaTwitter />
+                <SocialButton label={'Facebook'} href={'#'}>
+                  <FaFacebook />
                 </SocialButton>
-                <SocialButton label={'YouTube'} href={'#'}>
-                  <FaYoutube />
+                <SocialButton label={'Line'} href={'#'}>
+                  <FaLine />
                 </SocialButton>
                 <SocialButton label={'Instagram'} href={'#'}>
                   <FaInstagram />
