@@ -29,10 +29,10 @@ const HeroTitle = () => (
         <Text variant="heroTitle">where learning is</Text>
         <Box
             mt="10px"
-            fontSize={{md: "70px", base:"55px"}}
+            fontSize={{md: "80px", base:"55px"}}
             lineHeight={{md: "70px", base:"55px"}}
             fontWeight="800"
-            textShadow={"1px 1px blue"}
+            textShadow={"3px 3px blue"}
             textTransform="capitalize"
             color="#E7F1FC"
         >
@@ -61,7 +61,7 @@ const HeroTitle = () => (
  * @returns HEADING FOR HERO
  */
 const HeroSubtitle = (props:BoxProps) => (
-    <Box w={300} my="50px" {...props}>
+    <Box w={300} my="57px" {...props}>
         <Text variant="heroSubtitle">
             Rakuchien is a community of learners and teachers interacting with each other to learn new things while having fun!
         </Text>

@@ -31,9 +31,10 @@ const theme = extendTheme({
     Text: {
       variants: {
         heroTitle: {
-          fontSize: {md: "40px", base:"30px"},
+          fontSize: {md: "50px", base:"30px"},
           color:"white",
           fontWeight: "800",
+          textShadow:"1px 1px blue",
           lineHeight: {md: "80px", base:"30px"},
           textTransform: "capitalize",
         },
