@@ -16,6 +16,9 @@ import {
     IoSearchSharp,
   } from 'react-icons/io5';
   import { ReactElement } from 'react';
+import FunPlatform from '../images/funPlatform';
+import { BiBook } from 'react-icons/bi';
+import { MdAdsClick, MdGroup } from 'react-icons/md';
   
   interface FeatureProps {
     text: string;
@@ -42,7 +45,7 @@ import {
   
   export default function FeatureOffering() {
     return (
-      <Container maxW={'5xl'} py={{base:"0px", md:"250px"}}>
+      <Container maxW={'5xl'} pt={{base:"0px", md:"250px"}} pb={{base:"0px", md:"150px"}}>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
           <Stack spacing={4}>
             <Text
@@ -69,34 +72,27 @@ import {
               }>
               <Feature
                 icon={
-                  <Icon as={IoAnalyticsSharp} color={'yellow.500'} w={5} h={5} />
+                  <Icon as={BiBook} color={'yellow.500'} w={5} h={5} />
                 }
                 iconBg={useColorModeValue('yellow.100', 'yellow.900')}
-                text={'Business Planning'}
+                text={'Book Your Classes'}
               />
               <Feature
-                icon={<Icon as={IoLogoBitcoin} color={'green.500'} w={5} h={5} />}
+                icon={<Icon as={MdAdsClick} color={'green.500'} w={5} h={5} />}
                 iconBg={useColorModeValue('green.100', 'green.900')}
-                text={'Financial Planning'}
+                text={'Join the classes'}
               />
               <Feature
                 icon={
-                  <Icon as={IoSearchSharp} color={'purple.500'} w={5} h={5} />
+                  <Icon as={MdGroup} color={'purple.500'} w={5} h={5} />
                 }
                 iconBg={useColorModeValue('purple.100', 'purple.900')}
-                text={'Market Analysis'}
+                text={'Meet People like you'}
               />
             </Stack>
           </Stack>
           <Flex>
-            <Image
-              rounded={'md'}
-              alt={'feature image'}
-              src={
-                'https://images.unsplash.com/photo-1554200876-56c2f25224fa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
-              }
-              objectFit={'cover'}
-            />
+            <FunPlatform />
           </Flex>
         </SimpleGrid>
       </Container>

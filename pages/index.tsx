@@ -5,6 +5,7 @@ import Navbar from '../components/base/navbar'
 import FeatureOffering from '../components/top/feature'
 import Testimonials from '../components/top/testimonials'
 import Pricing from '../components/top/pricing'
+import ContactUs from '../components/top/contactUs'
 
 const Home: NextPage = () => {
   return (
@@ -20,11 +21,12 @@ const Home: NextPage = () => {
           <Container maxW={'5xl'} >
             <Navbar />
             <Hero  />
-            <FeatureOffering />
-            <Pricing />
           </Container>
+          <FeatureOffering />
+          <Testimonials />
+          <Pricing />
+          <ContactUs />
       </Box>
-      <Testimonials />
     </>
   )
 }
