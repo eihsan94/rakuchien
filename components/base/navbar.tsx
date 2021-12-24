@@ -1,5 +1,6 @@
 import {
   Box,
+  BoxProps,
   Flex,
   Stack,
   useColorMode,
@@ -7,13 +8,13 @@ import {
 import Logo from '../images/logo';
 
 
-export default function NavBar() {
+export default function NavBar(props: BoxProps) {
   return (
     <>
       <Box  
         backdropFilter="saturate(180%) blur(15px)" 
         px={4} 
-        position="absolute"
+        {...props}
         top="30px" 
         bg='linear-gradient(90deg, #7558F3 1%, rgba(255, 0, 0, .1) 80%)'
         width={{base:"90%",md:"50%" }}

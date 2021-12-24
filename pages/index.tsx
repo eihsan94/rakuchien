@@ -19,7 +19,7 @@ const Home: NextPage = () => {
         backgroundRepeat="no-repeat, no-repeat"
         >
           <Container maxW={'5xl'} >
-            <Navbar />
+            <Navbar pos="absolute" />
             <Hero  />
           </Container>
           <FeatureOffering />
