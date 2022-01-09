@@ -6,8 +6,8 @@ interface Props {}
 
 const Layout:FC<Props> = ({children}) => {
     return (
-        <Container maxW={'7xl'} py="90px">
-            <NavBar />
+        <Container maxW={'7xl'} py="50px">
+            <NavBar margin="auto"/>
             {children}
         </Container>
     )

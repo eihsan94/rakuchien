@@ -31,6 +31,7 @@ function PriceWrapper({ children }: { children: ReactNode }) {
 export default function Pricing() {
   return (
     <Box
+      w="100%"
       pb={{base:"0px", md:"150px"}}
     >
       <VStack spacing={2} textAlign="center">

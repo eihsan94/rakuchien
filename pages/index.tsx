@@ -25,7 +25,9 @@ const Home: NextPage = () => {
           <FeatureOffering />
           <Testimonials />
           <Pricing />
-          <ContactUs />
+          {/* 
+          <ContactUs /> 
+          */}
       </Box>
     </>
   )

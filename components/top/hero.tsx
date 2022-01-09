@@ -87,7 +87,7 @@ const CTABtn = () => (
         transition={"all .3s ease"}
         pos="relative"
         as={'a'}
-        href='/'
+        href='/booking'
         _hover={{
             bg: "purple",
             color: "white"

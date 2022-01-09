@@ -1,30 +1,75 @@
-import { AspectRatio, Box, Text } from '@chakra-ui/react'
-import React from 'react'
+import { 
+    Spinner,
+    Grid
+ } from '@chakra-ui/react'
+import { GetStaticProps } from 'next'
+import React, { FC } from 'react'
 import Layout from '../../components/base/layout'
-import NavBar from '../../components/base/navbar'
+import LessonBookingCard from '../../components/cards/lessonBookingCard'
+import { Lesson } from '../../types'
+import { gql } from '@apollo/client';
+import { graphqlClient } from '../../utils/gqlClient'
 
-interface Props {}
 
-function Index(props: Props) {
-    const {} = props
+export const getStaticProps: GetStaticProps = async() =>{
+    const { data } = await graphqlClient.query({
+        query: gql`
+            query {
+                lessonCollection {
+                items {
+                    sys {
+                        id
+                    }
+                    image {
+                        url
+                    }
+                    categoriesCollection {
+                        items {
+                          name
+                        }
+                    }
+                    name
+                    description
+                    duration
+                    teacher {
+                        name
+                        image {
+                            url
+                        }
+                    }
+                }
+                }
+            }
+        `,
+    });
+    return {
+      props: {
+        lessons: data.lessonCollection.items
+      },
+      revalidate: 5,
+    };
+}
+
+interface Props {
+    lessons: Lesson[]
+}
+
+
+const Index:FC<Props> = ({lessons}) => {
 
     return (
-        <Box bg="#FBFCFD">
-            <NavBar margin={"auto"}/>
-            <AspectRatio h="100vh"  overflow={"hidden"} >
-                <iframe
-                    title='ihsan sensei booking'
-                    src='https://calendly.com/rakuchien/pitch-project?text_color=#1F2949'
-                    allowFullScreen
-                />
-            </AspectRatio>
-            <Box position={"fixed"} zIndex={5} right={0} bottom={0} p={8} boxShadow={"xl"} >
-                <Text >
-                    値段は￥100
-                </Text>
-            </Box>
-        </Box>
+        <Layout>
+            {
+                lessons 
+                    ? 
+                    <Grid templateColumns='repeat(5, 1fr)' gap={6}>
+                        {lessons.map((l:Lesson, i: number) => <LessonBookingCard key={i} lesson={l} />)}
+                    </Grid>
+                    : <Spinner />
+            }
+        </Layout>
     )
 }
 
 export default Index
+

@@ -17,7 +17,7 @@ export default function NavBar(props: BoxProps) {
         {...props}
         top="30px" 
         bg='linear-gradient(90deg, #7558F3 1%, rgba(255, 0, 0, .1) 80%)'
-        width={{base:"90%",md:"50%" }}
+        width={{base:"100%",md:"50%" }}
         borderRadius={"full"}
          >
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
@@ -26,7 +26,7 @@ export default function NavBar(props: BoxProps) {
           </Box>
           <Flex alignItems={'center'}>
             <Stack direction={'row'} spacing={7}>
-
+sadf
             </Stack>
           </Flex>
         </Flex>
