@@ -5,6 +5,7 @@ export interface Lesson {
     name: string;
     description: string;
     duration: string;
+    price: number;
     teacher: Teacher;
     image: {
         url: string;
@@ -12,6 +13,17 @@ export interface Lesson {
     categoriesCollection: {
         items: Category[];
     };
+    schedulesCollection: {
+        items: Schedule[];
+    }
+}
+
+export interface Schedule {
+    sys: {
+        id: string;
+    };
+    name: string
+    date: string
 }
 
 export interface Teacher {

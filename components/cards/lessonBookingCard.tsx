@@ -1,20 +1,20 @@
-import { Avatar, Box, BoxProps, useDisclosure } from '@chakra-ui/react'
 import React from 'react'
-import { Lesson } from '../../types'
-
 import {
-    Badge,
-    Button,
-    Center,
-    Flex,
-    Heading,
-    Image,
-    Link,
-    Stack,
-    Text,
-    useColorModeValue,
-  } from '@chakra-ui/react';
+  Avatar, BoxProps, useDisclosure,
+  Badge,
+  Button,
+  Center,
+  Flex,
+  Heading,
+  Image,
+  Stack,
+  Text,
+  useColorModeValue,
+  Box,
+} from '@chakra-ui/react';
+import { Lesson } from '../../types'
 import LessonBookingModal from '../modals/lessonBookingModal';
+import { title } from 'process';
 interface Props extends BoxProps {
     lesson:Lesson;
 }
@@ -22,61 +22,82 @@ interface Props extends BoxProps {
 export default function LessonBookingCard(props: Props) {
     const {lesson} = props
     const {image, name, description, teacher, duration, categoriesCollection} = lesson
+    // const {image, name, description, teacher, duration} = lesson
     const {isOpen, onClose, onOpen} = useDisclosure()
 
     return (
-      <Center py={6}>
-        <Stack
-          borderWidth="1px"
-          borderRadius="20px"
-          w={{ sm: '100%', md: '540px' }}
-          direction={{ base: 'column', md: 'row' }}
-          bg={useColorModeValue('white', 'gray.900')}
+      <Center py={12}>
+        <Box
+          role={'group'}
+          p={6}
+          maxW={'330px'}
+          w={'full'}
+          bg={useColorModeValue('white', 'gray.800')}
           boxShadow={'2xl'}
-          p={4}
-        >
-          <Flex flex={1} bg="blue.200">
+          rounded={'lg'}
+          pos={'relative'}
+          zIndex={1}>
+          <Box
+            rounded={'lg'}
+            mt={-12}
+            pos={'relative'}
+            height={'230px'}
+            _after={{
+              transition: 'all .3s ease',
+              content: '""',
+              w: 'full',
+              h: 'full',
+              pos: 'absolute',
+              top: 5,
+              left: 0,
+              backgroundImage: `url(${image.url})`,
+              filter: 'blur(15px)',
+              zIndex: -1,
+            }}
+            _groupHover={{
+              _after: {
+                filter: 'blur(20px)',
+              },
+            }}>
             <Image
-                objectFit="cover"
-                boxSize="100%"
-                src={image.url}
-                fallbackSrc={image.url}
-                alt={image.url}
+              rounded={'lg'}
+              height={230}
+              width={282}
+              objectFit={'cover'}
+              src={image.url}
+              alt={image.url}
+              fallbackSrc={image.url}
             />
-          </Flex>
-          <Stack
-            flex={1}
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-            >
+          </Box>
+          <Stack pt={10} align={'center'}>
+            {/* BADGE */}
             <Stack align={'center'} justify={'flex-s'} direction={'row'}>
-                {categoriesCollection.items.map((c, i) => 
-                    <Badge
-                        key={i}
-                        px={2}
-                        py={1}
-                        bg={"gray.500"}
-                        color="white"
-                        borderRadius={"5px"}
-                        fontWeight={'400'}
-                    >
-                        #{c.name}
-                    </Badge>
-                )}
+              {categoriesCollection.items.map((c, i) => 
+                  <Badge
+                      key={i}
+                      px={2}
+                      py={1}
+                      bg={"gray.500"}
+                      color="white"
+                      borderRadius={"5px"}
+                      fontWeight={'400'}
+                  >
+                      #{c.name}
+                  </Badge>
+              )}
             </Stack>
-            <Heading fontSize={'2xl'} fontFamily={'body'}>
-              {name}
-            </Heading>
-            <Text fontWeight={600} color={'gray.500'} size="sm" >
+            <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
               {duration}
             </Text>
-            <Text
-              textAlign={'center'}
-              color={useColorModeValue('gray.700', 'gray.400')}
-              >
-              {description}
-            </Text>
+            <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
+              {name}
+            </Heading>
+            <Stack direction={'row'} align={'center'}>
+              <Text color={'gray.600'}>
+                {description}
+              </Text>
+            </Stack>
+            {/* AVATAR */}
             <Stack direction={'row'} spacing={4} align={'center'} justifyContent={"flex-start"}>
                 <Avatar
                     src={teacher.image.url}
@@ -86,12 +107,12 @@ export default function LessonBookingCard(props: Props) {
                     <Text fontWeight={600}>{teacher.name}</Text>
                 </Stack>
             </Stack>
-
-            <Stack
+          </Stack>
+          {/* BOOKING BUTTON */}
+          <Stack
               width={'100%'}
-              mt={'2rem'}
+              mt={'1.5em'}
               direction={'row'}
-              padding={4}
               justifyContent={'space-between'}
               alignItems={'center'}>
               <Button
@@ -116,8 +137,7 @@ export default function LessonBookingCard(props: Props) {
                 Book now!
               </Button>
             </Stack>
-          </Stack>
-        </Stack>
+        </Box>
         <LessonBookingModal isOpen={isOpen} onClose={onClose} lesson={lesson}/>
       </Center>
     );

@@ -14,7 +14,7 @@ import {
   import { ReactNode } from 'react';
   import { FaFacebook, FaInstagram, FaLine, FaTwitter, FaYoutube } from 'react-icons/fa';
   import { BiMailSend } from 'react-icons/bi';
-import Logo from '../images/logo';
+import { LogoWithName } from '../images/logo';
   
   const SocialButton = ({
     children,
@@ -66,7 +66,7 @@ import Logo from '../images/logo';
             spacing={8}>
             <Stack spacing={6}>
               <Box>
-                <Logo h="36px" color="black" />
+                <LogoWithName h="36px" color="black" />
               </Box>
               <Text fontSize={'sm'}>
                 © 2021 Rakuchien All rights reserved
