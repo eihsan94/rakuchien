@@ -15,11 +15,15 @@ const theme = extendTheme({
         fontWeight: "bold", // Normally, it is "semibold"
       },
       variants: {
-        "primary": {
-            bg: "orange.300",
-            color: "white",
-            _hover:{ bg: "orange.400"},
-            // boxShadow: "0 0 2px 2px #efdfde",
+        primary: {
+          bg:"#6441F1",  
+          color:"white", 
+          _hover:{ 
+            transform:"skewY(-1.5deg) scale(1.1)"
+          }, 
+          _focus:{
+            transform:"skewY(-1.5deg) scale(1.1)"
+          },
         },
         "accent": {
             bg: "blue.500",
