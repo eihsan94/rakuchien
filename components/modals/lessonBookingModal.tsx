@@ -21,6 +21,8 @@ import { JPY } from '../../utils/currencyUtils'
 import { ScheduleIcon } from '../icons/menuIcons'
 import Stepper, { StepConfigProps } from '../stepper'
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
+import { fetchPostJSON } from '../../utils/stripe/api-helpers'
+import getStripe from '../../utils/stripe/get-stripejs'
 
 const primary = "#6441F1"
 
@@ -49,6 +51,7 @@ const LessonBookingModal:FC<Props> = ({isOpen, onClose, lesson}) => {
   const { loading, error, data } = useQuery<{lesson: Lesson}>(GET_LESSON_COLLECTIONS(lesson.sys.id));
   const [schedules, setSchedules] = useState<Schedule[]>([])
   const [name, setName] = useState('')
+  const [paymentLoading, setPaymentLoading] = useState(false)
   const [email, setEmail] = useState('') // TODO add email from global login context
   const [booking, setBooking] = useState<{dates: string[], totalPrice: number}>({
     dates:[],
@@ -147,9 +150,41 @@ const LessonBookingModal:FC<Props> = ({isOpen, onClose, lesson}) => {
                       <Button
                         disabled={!email || !name}
                         variant="primary"
+                        isLoading={paymentLoading}
                         rightIcon={<ScheduleIcon color="white" fontSize={"22px"} />}
-                        onClick={() => {
-                          
+                        onClick={async() => {
+                          setPaymentLoading(true)
+                          // Create a Checkout Session.
+                          const response = await fetchPostJSON('/api/checkout_sessions', {
+                            line_items: booking.dates.map((d) => ({
+                              name: `${lesson.name} - ${fmt(parse(d), "yyyy年MM月dd日 (eee) HH:mm")}`,
+                              images: [lesson.image.url],
+                              amount: lesson.price,
+                              quantity: 1,
+                            })),
+                            customer_email: email,
+                            success_url: '/lessons/result',
+                            cancel_url: '/lessons',
+                          })
+
+                          if (response.statusCode === 500) {
+                            console.error(response.message)
+                            return
+                          }
+
+                          // Redirect to Checkout.
+                          const stripe = await getStripe()
+                          const { error } = await stripe!.redirectToCheckout({
+                            // Make the id field from the Checkout Session creation API response
+                            // available to this file, so you can provide it as parameter here
+                            // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+                            sessionId: response.id,
+                          })
+                          // If `redirectToCheckout` fails due to a browser or network
+                          // error, display the localized error message to your customer
+                          // using `error.message`.
+                          console.warn(error.message)
+                          setPaymentLoading(false)
                           // TODO [make this last] ask them to login first
 
                           // TODO add stripe payment handler here

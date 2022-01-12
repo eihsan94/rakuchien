@@ -15,10 +15,10 @@ const Layout:FC<Props> = ({title, description, children}) => {
                 <RightBar/>
                 <Box overflow={{base:"inherit", md:"auto"}} h={{base:"100%", md:"100vh"}} w="100%">
                     <Box px={{base:"30px", md:"12"}} pt={{base:"12", md:"16"}}>
-                        <Text as="h1" fontSize={"2xl"} fontWeight={"bold"}>{title}</Text>
+                        <Text as="h1" fontSize={"5xl"} fontWeight={"bold"}>{title}</Text>
                         <Text as="h6" fontSize={"sm"} color="gray.500">{description}</Text>
                     </Box>
-                    <Flex px={{base:"", md:"12", xl: 0}} justifyContent={{base:"center", xl:"flex-start"}} pb={{base:"12", md:"16"}}>
+                    <Flex px={{base:"", md:"12"}} justifyContent={{base:"center", md:"flex-start"}} pb={{base:"12", md:"16"}}>
                         {children}
                     </Flex>
                 </Box>

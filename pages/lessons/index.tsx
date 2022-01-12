@@ -61,7 +61,7 @@ const Index:FC = () => {
                     </Flex>
                     :error 
                         ? <Text variant="error">{JSON.stringify(error)}</Text>
-                        : <Grid templateColumns={{base:'repeat(1, 1fr)', md:'repeat(2, 1fr)', xl:'repeat(3, 1fr)'}} gap={16} w="100%">
+                        : <Grid templateColumns={{base:'repeat(1, 1fr)', md:'repeat(2, 1fr)', xl:'repeat(4, 1fr)'}} gap={16} w="100%">
                             {lessons.map((l:Lesson, i: number) => <LessonBookingCard key={i} lesson={l} />)}
                         </Grid>
             }
