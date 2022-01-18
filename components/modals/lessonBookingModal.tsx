@@ -104,6 +104,10 @@ const LessonBookingModal:FC<Props> = ({isOpen, onClose, lesson}) => {
     // SECOND STEP
     {
       content:<Flex flexDirection={{base:"column", md:"row"}} justifyContent={"space-between"} >
+          {/* 
+            // TODO [make this last] ask them to login first
+            // TODO with email and name  from the login fill the below
+          */}
           <Box flex={1}>
             <Text>Name</Text>
             <Input onChange={(evt) => setName(evt.target.value)}/>
@@ -180,17 +184,10 @@ const LessonBookingModal:FC<Props> = ({isOpen, onClose, lesson}) => {
                             // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
                             sessionId: response.id,
                           })
-                          // If `redirectToCheckout` fails due to a browser or network
-                          // error, display the localized error message to your customer
-                          // using `error.message`.
                           console.warn(error.message)
                           setPaymentLoading(false)
-                          // TODO [make this last] ask them to login first
 
-                          // TODO add stripe payment handler here
                           // TODO IN CONtentFUL create new booking records with user details init
-                          // TODO IN FRONTEND create request for create new booking
-                          console.log(email, name);
                           // TODO after stripe payment handler succeed open google calendar and connect user to it
                           
                         }}
