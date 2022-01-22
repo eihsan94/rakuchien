@@ -1,16 +1,14 @@
-import { 
+import {
     Spinner,
     Grid,
     Text,
     Flex,
- } from '@chakra-ui/react'
-import { GetStaticProps } from 'next'
+} from '@chakra-ui/react'
 import React, { FC, useEffect, useState } from 'react'
 import Layout from '../../components/base/layout'
 import LessonBookingCard from '../../components/cards/lessonBookingCard'
 import { Lesson } from '../../types'
 import { gql, useQuery } from '@apollo/client';
-import { graphqlClient } from '../../utils/gqlClient'
 
 const GET_LESSON_COLLECTIONS = gql`
     query {
@@ -43,26 +41,27 @@ const GET_LESSON_COLLECTIONS = gql`
 `;
 
 
-const Index:FC = () => {
+const Index: FC = () => {
     const { loading, error, data } = useQuery(GET_LESSON_COLLECTIONS);
     const [lessons, setLessons] = useState([])
+
     useEffect(() => {
         if (data) {
             setLessons(data.lessonCollection.items)
         }
-    },[data])
+    }, [data])
 
     return (
         <Layout title="Lessons" description="Let's learn 🤓">
             {
-                loading 
+                loading
                     ? <Flex justifyContent={"center"} p={16}>
-                        <Spinner color={"#775AF2"} size="xl" thickness='8px' emptyColor='pink' borderRadius={"full"}/>
+                        <Spinner color={"#775AF2"} size="xl" thickness='8px' emptyColor='pink' borderRadius={"full"} />
                     </Flex>
-                    :error 
+                    : error
                         ? <Text variant="error">{JSON.stringify(error)}</Text>
-                        : <Grid templateColumns={{base:'repeat(1, 1fr)', md:'repeat(2, 1fr)', xl:'repeat(4, 1fr)'}} gap={16} w="100%">
-                            {lessons.map((l:Lesson, i: number) => <LessonBookingCard key={i} lesson={l} />)}
+                        : <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', xl: 'repeat(4, 1fr)' }} gap={16} w="100%">
+                            {lessons.map((l: Lesson, i: number) => <LessonBookingCard key={i} lesson={l} />)}
                         </Grid>
             }
         </Layout>
