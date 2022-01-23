@@ -1,69 +1,42 @@
-import { 
+import {
     Spinner,
-    Grid,
-    Text,
     Flex,
- } from '@chakra-ui/react'
-import { GetStaticProps } from 'next'
+    Box,
+    Text,
+} from '@chakra-ui/react'
 import React, { FC, useEffect, useState } from 'react'
 import Layout from '../../components/base/layout'
-import LessonBookingCard from '../../components/cards/lessonBookingCard'
-import { Lesson } from '../../types'
-import { gql, useQuery } from '@apollo/client';
-import { graphqlClient } from '../../utils/gqlClient'
+import BookingCard from '../../components/cards/bookingCard';
+import { getAllBookings } from '../../queries/bookingQueries';
+import { Booking } from '../../types';
 
-const GET_LESSON_COLLECTIONS = gql`
-    query {
-        lessonCollection {
-        items {
-            sys {
-                id
-            }
-            image {
-                url
-            }
-            categoriesCollection {
-                items {
-                  name
-                }
-            }
-            name
-            description
-            duration
-            teacher {
-                name
-                image {
-                    url
-                }
-            }
-        }
-        }
-    }
-`;
-
-
-const Index:FC = () => {
-    const { loading, error, data } = useQuery(GET_LESSON_COLLECTIONS);
-    const [lessons, setLessons] = useState([])
+const Index: FC = () => {
+    const [loading, setLoading] = useState(false)
+    const [bookings, setBookings] = useState<Booking[]>([])
     useEffect(() => {
-        if (data) {
-            setLessons(data.lessonCollection.items)
-        }
-    },[data])
+        (async () => {
+            setLoading(true)
+            const b = await getAllBookings()
+            console.log(b);
+            setBookings(b)
+            setLoading(false)
+        })()
+    }, [])
 
     return (
         <Layout title="Bookings" description="Don't miss it 😉">
             {
-                loading 
+                loading
                     ? <Flex justifyContent={"center"} p={16} >
-                        <Spinner color={"#775AF2"} size="xl" thickness='8px' emptyColor='pink' borderRadius={"full"}/>
+                        <Spinner color={"#775AF2"} size="xl" thickness='8px' emptyColor='pink' borderRadius={"full"} />
                     </Flex>
-                    :error 
-                        ? <Text variant="error">{JSON.stringify(error)}</Text>
-                        : <Grid templateColumns={{base:'repeat(1, 1fr)', md:'repeat(2, 1fr)', xl:'repeat(3, 1fr)'}} gap={16} w="100%">
-                            {/* {lessons.map((l:Lesson, i: number) => <LessonBookingCard key={i} lesson={l} />)} */}
-                            bookings
-                        </Grid>
+                    : <Flex flexWrap={"wrap"}>
+                        {bookings.map((b: Booking, i: number) =>
+                            <BookingCard key={i} booking={b}
+                                _notLast={{ mr: 8 }}
+                            />
+                        )}
+                    </Flex>
             }
         </Layout>
     )

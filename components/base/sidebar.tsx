@@ -58,7 +58,7 @@ const UserMenu = () => {
     const { data: session, status } = useSession()
     const avatarSize = useBreakpointValue({ base: '1em', md: '1.5rem' })
     const avatarText = status === "authenticated" ? `${session?.user?.name}` : 'Login / Sign up'
-    const src = `${session?.user?.image}`
+    const src = session ? session?.user?.image : null
     const size = useBreakpointValue({ base: "sm", md: "md" })
 
     const onClickHandler = () => {
@@ -73,7 +73,11 @@ const UserMenu = () => {
     return (
         <Flex direction={"column"} alignItems={"center"} w={{ base: "", md: "100%" }} pos={{ base: "relative", md: "absolute" }} bottom={{ base: "", md: "5em" }} left={{ base: "", md: "0em" }} as="button" onClick={onClickHandler}>
             <AvatarGroup>
-                <Avatar bg='#6441F1' size={size} icon={<UserIcon color="white" fontSize={avatarSize} />} src={src} />
+                {
+                    src
+                        ? <Avatar bg='#6441F1' size={size} icon={<UserIcon color="white" fontSize={avatarSize} />} src={src} />
+                        : <Avatar bg='#6441F1' size={size} icon={<UserIcon color="white" fontSize={avatarSize} />} />
+                }
             </AvatarGroup>
             <Text mt="3" display={{ base: "none", xl: "inherit" }} fontWeight={"bold"}>{avatarText}</Text>
         </Flex>

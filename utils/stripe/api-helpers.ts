@@ -1,3 +1,16 @@
+export interface StripeLineItem {
+  name: string,
+  images: string[],
+  amount: number,
+  quantity: number,
+}
+export interface StripePayload {
+  line_items?: StripeLineItem[],
+  customer_email?: string,
+  success_url?: string,
+  cancel_url: string,
+  client_reference_id?: any,
+}
 export async function fetchGetJSON(url: string) {
   try {
     const data = await fetch(url).then((res) => res.json())
@@ -7,7 +20,7 @@ export async function fetchGetJSON(url: string) {
   }
 }
 
-export async function fetchPostJSON(url: string, data?: {}) {
+export async function fetchPostJSON(url: string, data?: StripePayload) {
   try {
     // Default options are marked with *
     const response = await fetch(url, {

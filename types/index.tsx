@@ -7,6 +7,7 @@ export interface Lesson {
     duration: string;
     price: number;
     teacher: Teacher;
+    url: string;
     image: {
         url: string;
     };
@@ -44,3 +45,24 @@ export interface Category {
     slug: string;
 }
 
+export interface Booking {
+    pk?: string
+    date: string
+    totalPrice: number
+    lesson: {
+        id: string
+        name: string
+        image: string
+        url: string
+        teacher: {
+            id: string
+            name: string
+            image: string
+        }
+    }
+}
+
+export interface PreBooking {
+    dates: string[],
+    totalPrice: number
+}

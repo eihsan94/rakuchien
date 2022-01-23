@@ -4,21 +4,21 @@ import {
   Flex,
   Stack,
 } from '@chakra-ui/react';
-import {LogoWithName} from '../images/logo';
+import { LogoWithName } from '../images/logo';
 
 
 export default function NavBar(props: BoxProps) {
   return (
     <>
-      <Box  
-        backdropFilter="saturate(180%) blur(15px)" 
-        px={4} 
+      <Box
+        backdropFilter="saturate(180%) blur(15px)"
+        px={4}
         {...props}
-        top="30px" 
+        top="30px"
         bg='linear-gradient(90deg, #7558F3 1%, rgba(255, 0, 0, .1) 80%)'
-        width={{base:"80%",md:"50%" }}
+        width={{ base: "80%", md: "50%" }}
         borderRadius={"full"}
-         >
+      >
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <Box as="a" href="/">
             <LogoWithName h="36px" />
@@ -33,5 +33,3 @@ export default function NavBar(props: BoxProps) {
   );
 }
 
-
-// TODO: Add avatarMenu component here later

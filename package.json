@@ -17,6 +17,7 @@
     "@emotion/styled": "^11",
     "@next-auth/dynamodb-adapter": "^1.0.2",
     "@stripe/stripe-js": "^1.22.0",
+    "axios": "^0.25.0",
     "currency.js": "^2.0.4",
     "date-fns": "^2.28.0",
     "framer-motion": "^4",

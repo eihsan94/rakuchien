@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react'
 import React, { FC, useEffect, useState } from 'react'
 import Layout from '../../components/base/layout'
-import LessonBookingCard from '../../components/cards/lessonBookingCard'
+import LessonBookingCard from '../../components/cards/lessonCard'
 import { Lesson } from '../../types'
 import { gql, useQuery } from '@apollo/client';
 
@@ -28,8 +28,12 @@ const GET_LESSON_COLLECTIONS = gql`
                 name
                 description
                 duration
+                url
                 price
                 teacher {
+                    sys {
+                        id
+                    }
                     name
                     image {
                         url
