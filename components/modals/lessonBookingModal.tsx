@@ -8,7 +8,6 @@ import {
   ModalCloseButton,
   Button,
   Flex,
-  Spinner,
   Text,
   Box,
   Table,
@@ -18,17 +17,17 @@ import {
   Tr,
   Tbody,
 } from '@chakra-ui/react'
-import { Booking, Lesson, PreBooking, Schedule } from '../../types'
+import { Lesson, PreBooking, Schedule } from '../../types'
 import { gql, useQuery } from '@apollo/client'
-import { fmt, fmtDate, fmtDay, fmtTime, parse } from '../../utils/dateUtils'
+import { fmtDate, fmtDay, fmtTime } from '../../utils/dateUtils'
 import { JPY } from '../../utils/currencyUtils'
 import { ScheduleIcon } from '../icons/menuIcons'
 import Stepper, { StepConfigProps } from '../stepper'
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import { useSession } from 'next-auth/react'
-import { paymentHandler, postSingle } from '../../utils/crudUtil'
 import ScheduleItem from '../scheduleItem'
 import { postBookings } from '../../queries/bookingQueries'
+import LoadingSpinner from '../loadingSpinner'
 
 const primary = "#6441F1"
 
@@ -187,9 +186,7 @@ const LessonBookingModal: FC<Props> = ({ isOpen, onClose, lesson }) => {
         <ModalBody>
           {
             loading
-              ? <Flex justifyContent={"center"} p={16}>
-                <Spinner color={"#775AF2"} size="xl" thickness='8px' emptyColor='pink' borderRadius={"full"} />
-              </Flex>
+              ? <LoadingSpinner />
               : error
                 ? <Text variant="error">{JSON.stringify(error)}</Text>
                 : <Stepper

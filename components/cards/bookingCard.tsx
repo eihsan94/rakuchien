@@ -1,16 +1,16 @@
 import React from 'react'
 import {
   Avatar, BoxProps, Button,
-  Center,
   Heading,
-  Image,
   Stack,
   Text,
-  useColorModeValue,
-  Box,
+  Flex,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import { Booking } from '../../types'
 import Card from './card';
+import { fmtTime } from '../../utils/dateUtils';
+import CardImage from './cardImage';
 
 interface Props extends BoxProps {
   booking: Booking;
@@ -18,24 +18,19 @@ interface Props extends BoxProps {
 
 export default function BookingCard(props: Props) {
   const { booking } = props
-  const { lesson } = booking
+  const { lesson, date } = booking
   const { image, name, teacher } = lesson
-
+  const imgSize = useBreakpointValue({ base: "200px", md: "250" })
   return (
     <Card {...props}>
-      <Image
-        rounded={'lg'}
-        height={230}
-        width={282}
-        objectFit={'cover'}
-        src={image}
-        alt={image}
-        fallbackSrc={image}
-      />
+      <CardImage src={image} w={imgSize} h={imgSize} />
       <Stack pt={10} align={'center'}>
         <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
           {name}
         </Heading>
+        <Flex alignItems={"center"}>
+          <Text fontSize={"1.2em"}>{fmtTime(date)}</Text>
+        </Flex>
         {/* AVATAR */}
         <Stack direction={'row'} spacing={4} align={'center'} justifyContent={"flex-start"}>
           <Avatar
@@ -47,35 +42,17 @@ export default function BookingCard(props: Props) {
           </Stack>
         </Stack>
       </Stack>
-      {/* BOOKING BUTTON */}
+      {/* detail */}
       <Stack
         width={'100%'}
         mt={'1.5em'}
         direction={'row'}
         justifyContent={'space-between'}
         alignItems={'center'}>
-        <Button
-          flex={1}
-          fontSize={'sm'}
-          rounded={'full'}
-          bg={'blue.400'}
-          color={'white'}
-          boxShadow={
-            '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
-          }
-          _hover={{
-            bg: 'blue.500',
-          }}
-          _focus={{
-            bg: 'blue.500',
-          }}
-          onClick={() => {
-
-          }}
-        >
-          Book now!
+        <Button variant={"booking"} flex={1} >
+          Booking Detail
         </Button>
       </Stack>
-    </Card>
+    </Card >
   );
 }

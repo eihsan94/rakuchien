@@ -30,7 +30,7 @@
     "react-reveal": "^1.2.2",
     "stripe": "^8.195.0",
     "swiper": "^7.3.3",
-    "swr": "^1.1.2",
+    "swr": "^1.2.0",
     "typewriter-effect": "^2.18.2"
   },
   "devDependencies": {

@@ -1,13 +1,17 @@
 import { Box, Container, Flex, Text } from '@chakra-ui/react'
 import React, { FC } from 'react'
+import ErrorMessage, { ErrorProps } from '../errorMessage'
+import LoadingSpinner from '../loadingSpinner'
 import { LeftBar, RightBar } from './sidebar'
 
 interface Props {
     title: string
+    error?: ErrorProps
+    loading?: boolean
     description: string
 }
 
-const Layout: FC<Props> = ({ title, description, children }) => {
+const Layout: FC<Props> = ({ title, description, children, error, loading }) => {
     return (
         <Box >
             <Flex pos="relative">
@@ -18,7 +22,13 @@ const Layout: FC<Props> = ({ title, description, children }) => {
                         <Text as="h6" fontSize={"sm"} color="gray.500">{description}</Text>
                     </Box>
                     <Flex px={{ base: "", md: "12" }} justifyContent={{ base: "center", md: "flex-start" }} pb={{ base: "12", md: "16" }}>
-                        {children}
+                        {
+                            error
+                                ? <ErrorMessage {...error} />
+                                : loading
+                                    ? <LoadingSpinner />
+                                    : children
+                        }
                     </Flex>
                 </Box>
                 {/* <LeftBar/> */}

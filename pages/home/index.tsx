@@ -11,6 +11,7 @@ import LessonBookingCard from '../../components/cards/lessonCard'
 import { Lesson } from '../../types'
 import { gql, useQuery } from '@apollo/client';
 import { graphqlClient } from '../../utils/gqlClient'
+import LoadingSpinner from '../../components/loadingSpinner'
 
 const GET_LESSON_COLLECTIONS = gql`
     query {
@@ -55,9 +56,7 @@ const Index: FC = () => {
         <Layout title="Home" description="Welcome Back, we miss you 🥰">
             {
                 loading
-                    ? <Flex justifyContent={"center"} p={16}>
-                        <Spinner color={"#775AF2"} size="xl" thickness='8px' emptyColor='pink' borderRadius={"full"} />
-                    </Flex>
+                    ? <LoadingSpinner />
                     : error
                         ? <Text variant="error">{JSON.stringify(error)}</Text>
                         : <Grid templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', xl: 'repeat(3, 1fr)' }} gap={16} w="100%">

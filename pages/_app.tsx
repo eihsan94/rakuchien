@@ -5,6 +5,7 @@ import Footer from '../components/base/footer'
 import { ApolloProvider } from '@apollo/client'
 import { graphqlClient } from '../utils/gqlClient'
 import { SessionProvider } from 'next-auth/react'
+import { SWRConfig } from 'swr'
 
 function MyApp({
   Component,
@@ -14,7 +15,9 @@ function MyApp({
     <SessionProvider session={session}>
       <ApolloProvider client={graphqlClient}>
         <ChakraProvider theme={theme}>
-          <Component {...pageProps} />
+          <SWRConfig value={{ revalidateOnFocus: false, shouldRetryOnError: false }}>
+            <Component {...pageProps} />
+          </SWRConfig>
           <Footer />
         </ChakraProvider>
       </ApolloProvider>
