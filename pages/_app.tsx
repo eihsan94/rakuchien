@@ -15,7 +15,10 @@ function MyApp({
     <SessionProvider session={session}>
       <ApolloProvider client={graphqlClient}>
         <ChakraProvider theme={theme}>
-          <SWRConfig value={{ revalidateOnFocus: false, shouldRetryOnError: false }}>
+          <SWRConfig value={{
+            revalidateOnFocus: false,
+            shouldRetryOnError: false,
+          }}>
             <Component {...pageProps} />
           </SWRConfig>
           <Footer />

@@ -1,5 +1,6 @@
 import { Box, Button, Flex, Spinner, Text } from '@chakra-ui/react'
 import { NextPage } from 'next'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
@@ -40,8 +41,6 @@ const ResultPage: NextPage = () => {
             ? <ErrorCard error={error} />
             : <PaymentComplete />
       }
-
-
     </Layout>
   )
 }
@@ -56,8 +55,10 @@ const PaymentComplete = () => (
       <CircleCheckIcon color={"white"} h="50px" w="50px" />
       <Text w="180px" fontSize={"1.1em"}>We booked your lesson successfully</Text>
     </Flex>
-    <Button as="a" href="/bookings" w="100%" >
-      Look at your bookings
+    <Button w="100%" >
+      <Link href="/bookings">
+        Look at your bookings
+      </Link>
     </Button>
   </Box>
 )

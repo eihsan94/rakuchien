@@ -11,16 +11,19 @@ import { Booking } from '../../types'
 import Card from './card';
 import { fmtTime } from '../../utils/dateUtils';
 import CardImage from './cardImage';
+import { useCrudHooks } from '../../hooks/useCrudHooks';
 
 interface Props extends BoxProps {
   booking: Booking;
+  deleteData: (pk?: string) => Promise<void>
 }
 
 export default function BookingCard(props: Props) {
-  const { booking } = props
-  const { lesson, date } = booking
+  const { booking, deleteData } = props
+  const { lesson, date, pk } = booking
   const { image, name, teacher } = lesson
   const imgSize = useBreakpointValue({ base: "200px", md: "250" })
+
   return (
     <Card {...props}>
       <CardImage src={image} w={imgSize} h={imgSize} />
@@ -51,6 +54,11 @@ export default function BookingCard(props: Props) {
         alignItems={'center'}>
         <Button variant={"booking"} flex={1} >
           Booking Detail
+        </Button>
+        <Button flex={1} onClick={async () => {
+          await deleteData(pk)
+        }}>
+          Cancel Booking
         </Button>
       </Stack>
     </Card >

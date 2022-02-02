@@ -4,6 +4,7 @@ import {
   Flex,
   Stack,
 } from '@chakra-ui/react';
+import Link from 'next/link'
 import { LogoWithName } from '../images/logo';
 
 
@@ -20,8 +21,10 @@ export default function NavBar(props: BoxProps) {
         borderRadius={"full"}
       >
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-          <Box as="a" href="/">
+          <Box cursor={"pointer"}>
             <LogoWithName h="36px" />
+            {/* <Link href={"/"} passHref>
+            </Link> */}
           </Box>
           <Flex alignItems={'center'}>
             <Stack direction={'row'} spacing={7}>

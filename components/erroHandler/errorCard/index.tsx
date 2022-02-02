@@ -8,9 +8,7 @@ export interface ErrorProps {
     status: number,
 }
 
-const ErrorMessage: FC<ErrorProps> = ({ message, status }) => {
-    console.log(status);
-
+const ErrorCard: FC<ErrorProps> = ({ message, status }) => {
     const boxStyle: BoxProps = {
         bg: "red.200",
         p: 8,
@@ -26,7 +24,7 @@ const ErrorMessage: FC<ErrorProps> = ({ message, status }) => {
     )
 }
 
-export default ErrorMessage
+export default ErrorCard
 
 const ErrorAction = ({ status }: { status: number }) => {
     const router = useRouter()

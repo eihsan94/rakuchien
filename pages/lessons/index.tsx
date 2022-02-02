@@ -1,8 +1,6 @@
 import {
-    Spinner,
     Grid,
     Text,
-    Flex,
 } from '@chakra-ui/react'
 import React, { FC, useEffect, useState } from 'react'
 import Layout from '../../components/base/layout'

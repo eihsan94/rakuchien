@@ -16,6 +16,7 @@ import { useRouter } from "next/router"
 import { FC, useEffect, useState } from "react"
 import { BookingIcon, HomeIcon, LessonIcon, UserIcon } from "../icons/menuIcons"
 import { Logo } from "../images/logo"
+import NextLink from "../nextLink"
 
 interface MenuProps {
     label: string
@@ -37,19 +38,19 @@ const Menu: FC<MenuProps> = ({ label, icon, href }) => {
             </Tooltip>,
     })
     return (
-        <Flex
-            as="a"
-            href={href}
-            w="100%"
-            alignItems={"center"}
-            justifyContent={{ base: "center", xl: "flex-start" }}
-            py={{ base: "20px", md: "20px" }}
-        >
-            {tooltipIcon}
-            <Box display={{ base: "none", xl: "inherit" }}>
-                {label}
-            </Box>
-        </Flex>
+        <NextLink w="100%" href={href}>
+            <Flex
+                w="100%"
+                alignItems={"center"}
+                justifyContent={{ base: "center", xl: "flex-start" }}
+                py={{ base: "20px", md: "20px" }}
+            >
+                {tooltipIcon}
+                <Box display={{ base: "none", xl: "inherit" }}>
+                    {label}
+                </Box>
+            </Flex>
+        </NextLink>
     )
 }
 
@@ -92,10 +93,12 @@ interface NavProps {
 const DesktopNav: FC<NavProps> = ({ menus, logoSize }) => {
     return (
         <VStack borderRight={"solid 1px rgba(0,0,0,.1)"} h="100vh" spacing={4} px={{ base: "20px", xl: "40px" }} pos="relative">
-            <Flex as="a" href="/" py="16" w="100%" overflow={"hidden"} alignItems={"center"}>
-                <Logo ml={{ base: "", xl: "2" }} h={logoSize} w={logoSize} color="black" />
-                <Text display={{ base: "none", xl: "inherit" }} fontWeight={"bold"}>RAKUCHIEN</Text>
-            </Flex>
+            <NextLink href="/">
+                <Flex py="16" w="100%" overflow={"hidden"} alignItems={"center"}>
+                    <Logo ml={{ base: "", xl: "2" }} h={logoSize} w={logoSize} color="black" />
+                    <Text display={{ base: "none", xl: "inherit" }} fontWeight={"bold"}>RAKUCHIEN</Text>
+                </Flex>
+            </NextLink>
             <Box>
                 {menus.map((m, i) => <Menu key={i} {...m} />)}
             </Box>
