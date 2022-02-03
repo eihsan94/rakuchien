@@ -8,6 +8,7 @@ import LessonBookingCard from '../../components/cards/lessonCard'
 import { Lesson } from '../../types'
 import { gql, useQuery } from '@apollo/client';
 import LoadingSpinner from '../../components/loadingSpinner'
+import { useI18n } from '../../hooks/useI18n'
 
 const GET_LESSON_COLLECTIONS = gql`
     query {
@@ -46,6 +47,7 @@ const GET_LESSON_COLLECTIONS = gql`
 
 const Index: FC = () => {
     const { loading, error, data } = useQuery(GET_LESSON_COLLECTIONS);
+    const { translate } = useI18n()
     const [lessons, setLessons] = useState([])
 
     useEffect(() => {
@@ -55,7 +57,7 @@ const Index: FC = () => {
     }, [data])
 
     return (
-        <Layout title="Lessons" description="Let's learn 🤓">
+        <Layout title={translate('LESSONS_PAGE_TITLE')} description="Let's learn 🤓">
             {
                 loading
                     ? <LoadingSpinner />

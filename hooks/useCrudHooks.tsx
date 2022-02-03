@@ -3,7 +3,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { getSession } from 'next-auth/react';
 import { fetcherUtil } from '../utils/swrUtil';
 import { handleHttpError } from '../utils/errorHandlerUtil';
-import useErrorToaster from '../components/erroHandler/errorToaster';
+import useErrorToaster from '../components/errorHandler/errorToaster';
 import { useCallback, useState } from 'react';
 
 const baseURL = `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/api`;
@@ -34,7 +34,7 @@ const useCrudHooks = (prefix: string, reqConfig?: AxiosRequestConfig) => {
         setReqLoading(false)
     }
     // DELETE HOOKS
-    const deleteData = useCallback(async (pk: string | undefined) => {
+    const deleteHandler = useCallback(async (pk: string | undefined) => {
         // Optimistic DELETE UPDATE
         await mutateData((res: any) => {
             const { data: dataState } = res
@@ -54,7 +54,7 @@ const useCrudHooks = (prefix: string, reqConfig?: AxiosRequestConfig) => {
         error,
         loading: !data && !error,
         reqLoading,
-        deleteData,
+        deleteHandler,
         ...swrProps,
     }
 }

@@ -61,6 +61,11 @@ const theme = extendTheme({
           lineHeight: { md: "1.5em", base: "1.5em" },
           textShadow: "1px 1px blue"
         },
+        h3: {
+          fontSize: { md: "1.5em", base: "1.3em" },
+          lineHeight: { md: "1.5em", base: "1.3em" },
+          fontWeight: "bold",
+        },
         error: {
           color: "red.600",
         }

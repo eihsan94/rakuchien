@@ -21,7 +21,6 @@ function MyApp({
           }}>
             <Component {...pageProps} />
           </SWRConfig>
-          <Footer />
         </ChakraProvider>
       </ApolloProvider>
     </SessionProvider>

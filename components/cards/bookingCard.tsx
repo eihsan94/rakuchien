@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import {
   Avatar, BoxProps, Button,
   Heading,
@@ -11,15 +11,13 @@ import { Booking } from '../../types'
 import Card from './card';
 import { fmtTime } from '../../utils/dateUtils';
 import CardImage from './cardImage';
-import { useCrudHooks } from '../../hooks/useCrudHooks';
 
 interface Props extends BoxProps {
   booking: Booking;
-  deleteData: (pk?: string) => Promise<void>
+  deleteHandler: (pk?: string) => Promise<void>
 }
 
-export default function BookingCard(props: Props) {
-  const { booking, deleteData } = props
+const BookingCard: FC<Props> = ({ booking, deleteHandler, ...props }) => {
   const { lesson, date, pk } = booking
   const { image, name, teacher } = lesson
   const imgSize = useBreakpointValue({ base: "200px", md: "250" })
@@ -56,7 +54,7 @@ export default function BookingCard(props: Props) {
           Booking Detail
         </Button>
         <Button flex={1} onClick={async () => {
-          await deleteData(pk)
+          await deleteHandler(pk)
         }}>
           Cancel Booking
         </Button>
@@ -64,3 +62,5 @@ export default function BookingCard(props: Props) {
     </Card >
   );
 }
+
+export default BookingCard

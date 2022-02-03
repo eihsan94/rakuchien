@@ -4,11 +4,12 @@ import {
   Flex,
   Stack,
 } from '@chakra-ui/react';
-import Link from 'next/link'
+import { useRouter } from 'next/router';
 import { LogoWithName } from '../images/logo';
 
 
 export default function NavBar(props: BoxProps) {
+  const router = useRouter()
   return (
     <>
       <Box
@@ -21,10 +22,8 @@ export default function NavBar(props: BoxProps) {
         borderRadius={"full"}
       >
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-          <Box cursor={"pointer"}>
+          <Box cursor={"pointer"} onClick={() => router.push("/")}>
             <LogoWithName h="36px" />
-            {/* <Link href={"/"} passHref>
-            </Link> */}
           </Box>
           <Flex alignItems={'center'}>
             <Stack direction={'row'} spacing={7}>

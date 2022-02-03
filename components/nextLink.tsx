@@ -8,8 +8,6 @@ const NextLink: FC<Props> = ({ href, children, ...props }) => {
     return (
         <Box cursor={"pointer"} {...props}>
             <Link href={href}>
-                {/* <>
-                </> */}
                 {children}
             </Link>
         </Box>
