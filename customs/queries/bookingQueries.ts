@@ -15,7 +15,7 @@ export const getAllBookings = async (): Promise<Booking[]> => {
     return bookings
 }
 export const postBookings = async (customer_email: string, lesson: Lesson, preBooking: PreBooking) => {
-    const { sys, name, image, url, teacher } = lesson
+    const { sys, name, image, description, url, teacher } = lesson
     const { dates: preBookingDates } = preBooking
     const bookings: Booking[] = preBookingDates.map(date => ({
         date,
@@ -23,6 +23,7 @@ export const postBookings = async (customer_email: string, lesson: Lesson, preBo
         lesson: {
             id: sys.id,
             name,
+            description,
             image: image.url,
             url,
             teacher: {

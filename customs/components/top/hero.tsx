@@ -1,8 +1,8 @@
 import { Box, BoxProps, Container, Flex, Image, Text, useColorMode } from '@chakra-ui/react'
+import NextLink from '@components/NextLink';
 import React from 'react'
 import Typewriter from 'typewriter-effect';
 import HeroImage from '../images/heroImage';
-import NextLink from '../nextLink';
 
 function Hero(props: BoxProps) {
     return (
@@ -30,7 +30,7 @@ const HeroTitle = () => (
         <Text variant="heroTitle">where learning is</Text>
         <Box
             mt="10px"
-            fontSize={{ md: "80px", base: "55px" }}
+            fontSize={{ md: "80px", base: "50px" }}
             lineHeight={{ md: "70px", base: "55px" }}
             fontWeight="800"
             textShadow={"3px 3px blue"}

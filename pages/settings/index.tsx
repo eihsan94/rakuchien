@@ -39,7 +39,7 @@ function Index(props: Props) {
         {
             title: translate("AUTH_LABEL"),
             content:
-                <Button onClick={() => signOut()}>
+                <Button onClick={() => signOut({ callbackUrl: "/lessons" })}>
                     Sign Out
                 </Button>
         },

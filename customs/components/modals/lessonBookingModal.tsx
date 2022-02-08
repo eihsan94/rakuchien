@@ -24,10 +24,10 @@ import Stepper, { StepConfigProps } from '../stepper'
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import { useSession } from 'next-auth/react'
 import ScheduleItem from '../scheduleItem'
-import { postBookings } from '../../queries/bookingQueries'
 import LoadingSpinner from '../loadingSpinner'
 import { JPY } from '@utils/currencyUtils'
 import { fmtDay, fmtDate, fmtTime } from '@utils/dateUtils'
+import { postBookings } from '@queries/bookingQueries'
 
 const primary = "#6441F1"
 

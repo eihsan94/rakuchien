@@ -1,6 +1,6 @@
 import { mode } from "@chakra-ui/theme-tools";
 
-export const primaryColorHex = "#4FD1C5"
+export const primaryColorHex = "#6441F1"
 export const primaryColorRgba = (opacityVal: number) => `rgba(79, 209, 197, ${opacityVal || 1})`
 
 

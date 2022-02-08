@@ -1,8 +1,8 @@
 import { Box, Text } from "@chakra-ui/react"
 import { fmtTime, fmtDate, fmtDay } from "@utils/dateUtils"
+import { primaryColorHex } from "customs/theme/styles"
 import { FC } from "react"
 import { Schedule } from "../types"
-const primary = "#6441F1"
 
 interface ScheduleItemProps {
     schedule: Schedule
@@ -20,7 +20,7 @@ const ScheduleItem: FC<ScheduleItemProps> = ({ schedule, onSelectSchedule, selec
             shadow={"xl"}
             p={8} pos="relative"
             w={{ base: "100%", md: "fit-content" }}
-            bg={selected ? primary : 'white'}
+            bg={selected ? primaryColorHex : 'white'}
             color={selected ? 'white' : 'black'}
             _notFirst={{
                 ml: { base: 0, md: "3em" },
@@ -36,7 +36,7 @@ const ScheduleItem: FC<ScheduleItemProps> = ({ schedule, onSelectSchedule, selec
         >
             <Text fontSize={"1.5em"}>{fmtTime(schedule.date)}</Text>
             <Text fontWeight={"bold"}>{fmtDate(schedule.date)}</Text>
-            <Text pos="absolute" top="1em" right="1em" bg={primary} color={"white"} p="2" px="3" borderRadius={"full"}>{fmtDay(schedule.date)}</Text>
+            <Text pos="absolute" top="1em" right="1em" variant="dayLabel">{fmtDay(schedule.date)}</Text>
         </Box>
     )
 }

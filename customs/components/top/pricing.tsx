@@ -13,6 +13,7 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { FaCheckCircle } from 'react-icons/fa';
+import { primaryColorHex } from 'customs/theme/styles';
 
 function PriceWrapper({ children }: { children: ReactNode }) {
   return (
@@ -32,7 +33,8 @@ export default function Pricing() {
   return (
     <Box
       w="100%"
-      color={useColorModeValue('gray.50', 'gray.700')}
+      color={useColorModeValue('gray.700', primaryColorHex)}
+      px={"30px"}
       pb={{ base: "0px", md: "150px" }}
     >
       <VStack spacing={2} textAlign="center" >

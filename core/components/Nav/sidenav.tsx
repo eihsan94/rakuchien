@@ -150,14 +150,14 @@ const DesktopNav: FC<NavProps> = ({ menus }) => {
     )
 }
 const MobileNav: FC<NavProps> = ({ menus }) => {
-    const logoSize = "30px"
+    const logoSize = "40px"
     return (
         <Flex
             pos="fixed"
             bottom="0"
             borderTop={"solid 1px rgba(0,0,0,.1)"}
             w="100vw"
-            py=".5em"
+            py="1em"
             alignItems={"center"}
             zIndex={4}
             shadow="md"

@@ -24,7 +24,7 @@ export default function NavBar(props: BoxProps) {
       >
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <Box cursor={"pointer"} onClick={() => router.push("/")}>
-            <LogoWithName h="36px" color={useColorModeValue('black', 'white')} />
+            <LogoWithName h="36px" color={"white"} />
           </Box>
           <Flex alignItems={'center'}>
             <Stack direction={'row'} spacing={7}>

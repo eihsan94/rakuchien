@@ -1,8 +1,9 @@
-import { useBreakpointValue, Stack, Heading, Flex, Avatar, Button, BoxProps, Text } from "@chakra-ui/react";
+import { Stack, Flex, Avatar, Button, BoxProps, Text, useDisclosure, Box, useToast, UseToastOptions } from "@chakra-ui/react";
 import Card from "@components/Card/Card";
-import { fmtDate, fmtTime } from "@utils/dateUtils";
+import { fmtDate, fmtDay, fmtTime } from "@utils/dateUtils";
 import { Booking } from "customs/types";
 import { FC } from "react";
+import BookingDetailsModal from "../modals/bookingDetailsModal";
 import CardImage from "./cardImage";
 
 interface SenseiAvatarProps extends BoxProps {
@@ -28,46 +29,51 @@ const SenseiAvatar: FC<SenseiAvatarProps> = ({ image, name, ...otherProps }) => 
 
 interface Props extends BoxProps {
   booking: Booking;
-  deleteHandler: (pk?: string) => Promise<void>
+  deleteHandler: (pk: string, successToaster: UseToastOptions) => Promise<void>
 }
 
 const BookingCard: FC<Props> = ({ booking, deleteHandler, ...props }) => {
   const { lesson, date, pk } = booking
-  const { image, name, teacher } = lesson
-  const imgSize = { base: "100%", md: "250" }
-
+  const { image, name } = lesson
+  const imgSize = { base: "4em", md: "5em" }
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const toaster = useToast()
   return (
-    <Card >
-      <CardImage src={image} w={imgSize} h={imgSize} />
-      <Stack pt={10} align={'center'}>
-        <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
-          {name}
-        </Heading>
-        <Flex flexWrap={"wrap"} direction={{ base: "column", md: "row" }} justifyContent="center" alignItems="center" fontSize={{ base: "sm", md: "md" }}>
-          <Text>{fmtDate(date)}</Text>
-          <Text ml={{ base: 0, md: "10px" }}>{fmtTime(date)}</Text>
+    <Card {...props} pos="relative" onClick={onOpen} cursor="pointer" transition={"all .3s ease"} _hover={{
+      transform: "translateY(-.5em)",
+      boxShadow: "xl"
+    }}>
+      <Flex align={'center'}>
+        <CardImage src={image} w={imgSize} h={imgSize} />
+        <Flex ml={"1em"} flexWrap={"wrap"} direction="column" fontSize={{ base: "sm", md: "md" }} w={{ base: "56%", md: "50%" }} >
+          <Box fontSize="1em" w="100%">
+            <Text fontWeight={"bold"} w="100%" overflow={"hidden"} whiteSpace="nowrap" textOverflow={"ellipsis"}>
+              {name}
+            </Text>
+            <Text>{fmtDate(date)}</Text>
+            <Text >{fmtTime(date)}</Text>
+          </Box>
         </Flex>
-
-        {teacher && <SenseiAvatar display={{ base: "none", md: "inherit" }} name={teacher.name} image={teacher.image} />}
-      </Stack>
-
-      {/* detail */}
-      <Stack
-        width={'100%'}
-        mt={'1.5em'}
-        direction={{ base: 'column', xl: 'row' }}
-        justifyContent={'space-between'}
-        alignItems={'center'}>
-        <Button variant={"booking"} flex={1} w="100%">
-          Booking Detail
-        </Button>
-        <Button variant={"cancelBooking"} flex={1} w="100%" onClick={async () => {
-          await deleteHandler(pk)
-        }}>
-          Cancel Booking
-        </Button>
-      </Stack>
+        <Text top="1em" right="1em" pos="absolute" variant="dayLabel" >{fmtDay(date)}</Text>
+      </Flex>
+      <BookingDetailsModal isOpen={isOpen} onClose={onClose} booking={booking} onBookingCancel={
+        async () => {
+          toaster({
+            title: `Cancelling ${name} booking`,
+            status: "warning",
+            description: <>
+              <Text>Are you sure? 🤨</Text>
+              <Button variant="primary" onClick={() => toaster.closeAll()}>no</Button>
+              <Button ml="1em" variant="basic" onClick={async () => {
+                toaster.closeAll()
+                await deleteHandler(`${pk}`, { title: `Cancelled ${name} ${fmtDate(date)} ${fmtTime(date)} (${fmtDay(date)}) booking successfully` })
+                onClose()
+              }}>Yes</Button>
+            </>,
+          })
+        }} />
     </Card >
+
   );
 }
 

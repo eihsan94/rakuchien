@@ -1,10 +1,10 @@
 // theme.js
 import { coreTheme } from "core/theme/theme"
-import { globalStyles } from "./styles"
+import { globalStyles, primaryColorHex } from "./styles"
 
 const bookingBtnProps = {
     fontSize: { base: 'xs', md: 'sm' },
-    rounded: 'full',
+    rounded: '1em',
     px: "2em",
     py: "1em",
 }
@@ -18,7 +18,7 @@ const customThemes = {
             },
             variants: {
                 primary: {
-                    bg: "#6441F1",
+                    bg: primaryColorHex,
                     color: "white",
                     _hover: {
                         transform: "skewY(-1.5deg) scale(1.1)"
@@ -35,7 +35,7 @@ const customThemes = {
                 booking: {
                     ...bookingBtnProps,
                     boxShadow: '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)',
-                    bg: 'blue.400',
+                    bg: primaryColorHex,
                     color: 'white',
                     _hover: {
                         bg: 'blue.500',
@@ -60,9 +60,6 @@ const customThemes = {
         },
         Text: {
             variants: {
-                panel: (props: any) => ({
-                    color: props.colorMode === "dark" ? "white" : "gray.700",
-                }),
                 heroTitle: {
                     fontSize: { md: "50px", base: "30px" },
                     color: "white",
@@ -78,14 +75,26 @@ const customThemes = {
                     textShadow: "1px 1px blue"
                 },
                 h3: (props: any) => ({
-                    // color: props.colorMode === "dark" ? "white" : "gray.700",
-                    color: "gray.700",
+                    color: props.colorMode === "dark" ? "white" : "gray.700",
+                    // color: "gray.700",
                     fontSize: { md: "1.5em", base: "1.3em" },
                     lineHeight: { md: "1.5em", base: "1.3em" },
                     fontWeight: "bold",
                 }),
                 error: {
                     color: "red.600",
+                },
+                pageSectionTitle: (props: any) => ({
+                    fontSize: "xl",
+                    fontWeight: "bold",
+                    color: props.colorMode === "dark" ? "white" : "gray.700",
+                }),
+                dayLabel: {
+                    bg: "#6441F1",
+                    color: "white",
+                    p: "2",
+                    px: "3",
+                    borderRadius: "xl"
                 }
             }
         }

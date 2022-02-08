@@ -4,11 +4,12 @@ import { CSSProperties } from "react";
 
 interface Props extends LottieComponentProps {
     animationData: any
+    noLoop?: boolean
 }
 
 function RenderLottie(props: Props) {
     return (
-        <LottieReact {...props} loop={true} />
+        <LottieReact {...props} loop={!props.noLoop} />
     )
 }
 

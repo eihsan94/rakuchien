@@ -74,7 +74,7 @@ function Billing() {
                 >
                   <Flex justify="space-between" align="center">
                     <Text fontSize="md" fontWeight="bold">
-                      Purity UI
+                      Rakuchien
                     </Text>
                     <Icon
                       as={RiMastercardFill}

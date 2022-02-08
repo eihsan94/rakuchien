@@ -1,1 +1,1 @@
-export const APP_NAME = 'rakuchien-admin'
+export const APP_NAME = 'rakuchien'

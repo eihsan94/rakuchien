@@ -5,7 +5,6 @@ import Navbar from '../customs/components/base/navbar'
 import FeatureOffering from '../customs/components/top/feature'
 import Testimonials from '../customs/components/top/testimonials'
 import Pricing from '../customs/components/top/pricing'
-import ContactUs from '../customs/components/top/contactUs'
 import Footer from '../customs/components/base/footer'
 
 const Home: NextPage = () => {
@@ -26,7 +25,7 @@ const Home: NextPage = () => {
         <FeatureOffering />
         <Testimonials />
         <Pricing />
-        {/* 
+        {/*         
           <ContactUs /> 
           */}
         <Footer />

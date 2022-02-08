@@ -52,6 +52,7 @@ export interface Booking {
     lesson: {
         id: string
         name: string
+        description: string
         image: string
         url: string
         teacher: {

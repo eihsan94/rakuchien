@@ -5,8 +5,6 @@ import {
   Flex,
   Grid,
   Icon,
-  Image,
-  Portal,
   Progress,
   SimpleGrid,
   Spacer,
@@ -24,8 +22,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 // assets
-const peopleImage = "/core/assets/img/people-image.png";
-const logoChakra = "/core/assets/svg/logo-white.svg";
+const peopleImage = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3271&q=80";
 
 // Custom components
 
@@ -45,6 +42,7 @@ import { dashboardTableData, timelineData } from "../../variables/general";
 import LineChart from "../../components/Charts/LineChart";
 import DashboardTableRow from "../../components/Tables/DashboardTableRow";
 import TimelineRow from "../../components/Tables/TimelineRow";
+import Logo from "customs/icons/logo";
 
 
 export default function Dashboard() {
@@ -68,7 +66,7 @@ export default function Dashboard() {
   ]);
 
   return (
-    <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>
+    <Flex flexDirection="column" pt={{ base: "30px", md: "30px" }}>
       <SimpleGrid columns={{ sm: 1, md: 2, xl: 4 }} spacing="24px">
         <Card minH="83px">
           <CardBody>
@@ -239,7 +237,7 @@ export default function Dashboard() {
                   fontWeight="bold"
                   pb=".5rem"
                 >
-                  Purity UI Dashboard
+                  Rakuchien Dashboard
                 </Text>
                 <Text fontSize="sm" color="gray.400" fontWeight="normal">
                   From colors, cards, typography to complex elements, you will
@@ -287,11 +285,7 @@ export default function Dashboard() {
                 width={{ lg: "40%" }}
                 minHeight={{ sm: "250px" }}
               >
-                <Image
-                  src={logoChakra}
-                  alt="chakra image"
-                  minWidth={{ md: "300px", lg: "auto" }}
-                />
+                <Logo width={{ md: "300px", lg: "auto" }} height={{ md: "300px", lg: "auto" }} />
               </Flex>
             </Flex>
           </CardBody>

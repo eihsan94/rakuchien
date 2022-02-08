@@ -5,6 +5,7 @@ import {
   Flex,
   Icon,
   SimpleGrid,
+  Text,
   useColorModeValue,
 } from '@chakra-ui/react';
 
@@ -133,10 +134,12 @@ export default function Testimonials() {
       pb={{ base: "0px", md: "150px" }}
       textAlign={'center'}
       pt={10}
+      px={"30px"}
       justifyContent={'center'}
+      alignItems={'center'}
       direction={'column'}
-      width={'full'}>
-      <Box width={{ base: 'full', sm: 'lg', lg: 'xl' }} margin={'auto'}>
+    >
+      <Box width={{ base: '100%', lg: 'xl' }} >
         <chakra.h3
           fontWeight={'bold'}
           fontSize={20}
@@ -146,7 +149,7 @@ export default function Testimonials() {
         </chakra.h3>
         <chakra.h1
           py={5}
-          fontSize={48}
+          fontSize={{ base: 32, md: 48 }}
           fontWeight={'bold'}
           color={"gray.700"}>
           Who says learning should be boring?

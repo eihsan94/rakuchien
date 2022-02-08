@@ -28,7 +28,7 @@ const avatar10 = "/core/assets/img/avatars/avatar10.png";
 export const dashboardTableData = [
   {
     logo: AdobexdLogo,
-    name: "Purity UI Version",
+    name: "Rakuchien Version",
     members: [avatar1, avatar2, avatar3, avatar4, avatar5],
     budget: "$14,000",
     progression: 60,
@@ -110,7 +110,7 @@ export const timelineData = [
 export const rtlDashboardTableData = [
   {
     logo: AdobexdLogo,
-    name: "نسخة Purity UI",
+    name: "نسخة Rakuchien",
     members: [avatar1, avatar2, avatar3, avatar4, avatar5],
     budget: "$14,000",
     progression: 60,
@@ -250,7 +250,7 @@ export const tablesTableData = [
 export const tablesProjectData = [
   {
     logo: AdobexdLogo,
-    name: "Purity UI Version",
+    name: "Rakuchien Version",
     budget: "$14,000",
     status: "Working",
     progression: 60,
