@@ -1,9 +1,10 @@
+import { formatAmountForStripe } from '@utils/stripe/stripe-helpers'
+import { CURRENCY } from 'customs/config/stripe'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { CURRENCY } from '../../../config/stripe'
 
 import Stripe from 'stripe'
-import { formatAmountForStripe } from '../../../utils/stripe/stripe-helpers'
+
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   // https://github.com/stripe/stripe-node#configuration
@@ -15,8 +16,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    let {line_items, customer_email, cancel_url, success_url} = req.body
-    line_items = line_items.map((i: any) => ({...i, amount: formatAmountForStripe(i.amount, CURRENCY), currency: CURRENCY}))
+    let { line_items, customer_email, cancel_url, success_url } = req.body
+    line_items = line_items.map((i: any) => ({ ...i, amount: formatAmountForStripe(i.amount, CURRENCY), currency: CURRENCY }))
     try {
       // Create Checkout Sessions from body params.
       const params: Stripe.Checkout.SessionCreateParams = {

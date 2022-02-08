@@ -1,11 +1,11 @@
 import type { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/react'
-import theme from '../styles/theme'
-import Footer from '../components/base/footer'
+
 import { ApolloProvider } from '@apollo/client'
-import { graphqlClient } from '../utils/gqlClient'
 import { SessionProvider } from 'next-auth/react'
 import { SWRConfig } from 'swr'
+import { graphqlClient } from '@utils/gqlClient'
+import theme from 'customs/theme/theme'
 
 function MyApp({
   Component,

@@ -1,18 +1,12 @@
 import {
-    Spinner,
     Grid,
     Text,
-    Flex,
 } from '@chakra-ui/react'
-import { GetStaticProps } from 'next'
 import React, { FC, useEffect, useState } from 'react'
-import Layout from '../../components/base/layout'
-import LessonBookingCard from '../../components/cards/lessonCard'
-import { Lesson } from '../../types'
+import Layout from '../../customs/components/base/layout'
 import { gql, useQuery } from '@apollo/client';
-import { graphqlClient } from '../../utils/gqlClient'
-import LoadingSpinner from '../../components/loadingSpinner'
-import { useI18n } from '../../hooks/useI18n'
+import LoadingSpinner from '../../customs/components/loadingSpinner'
+import { useI18n } from '../../core/hooks/useI18n'
 
 const GET_LESSON_COLLECTIONS = gql`
     query {

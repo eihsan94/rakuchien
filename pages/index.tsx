@@ -1,12 +1,12 @@
 import { Container, Box } from '@chakra-ui/react'
 import type { NextPage } from 'next'
-import Hero from '../components/top/hero'
-import Navbar from '../components/base/navbar'
-import FeatureOffering from '../components/top/feature'
-import Testimonials from '../components/top/testimonials'
-import Pricing from '../components/top/pricing'
-import ContactUs from '../components/top/contactUs'
-import Footer from '../components/base/footer'
+import Hero from '../customs/components/top/hero'
+import Navbar from '../customs/components/base/navbar'
+import FeatureOffering from '../customs/components/top/feature'
+import Testimonials from '../customs/components/top/testimonials'
+import Pricing from '../customs/components/top/pricing'
+import ContactUs from '../customs/components/top/contactUs'
+import Footer from '../customs/components/base/footer'
 
 const Home: NextPage = () => {
   return (

@@ -2,10 +2,11 @@ import { Box, Button, Select, Text } from '@chakra-ui/react'
 import { GetServerSideProps } from 'next'
 import { signOut, useSession } from 'next-auth/react'
 import React from 'react'
-import Layout from '../../components/base/layout'
-import { useI18n } from '../../hooks/useI18n'
-import { useLocales } from '../../hooks/useLocales'
-import { redirectTop } from '../../utils/ssrAuth'
+import Layout from '../../customs/components/base/layout'
+import { useI18n } from '../../core/hooks/useI18n'
+import { useLocales } from '../../core/hooks/useLocales'
+import { redirectTo } from '@utils/ssrAuth'
+import DarkModeBtn from '@components/Buttons/darkMode'
 
 interface Props { }
 
@@ -30,6 +31,10 @@ function Index(props: Props) {
                         </Select>
                     }
                 </>
+        },
+        {
+            title: translate("DARK_MODE_LABEL"),
+            content: <DarkModeBtn />
         },
         {
             title: translate("AUTH_LABEL"),
@@ -61,5 +66,5 @@ export default Index
 
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    return redirectTop(context)
+    return redirectTo(context)
 };

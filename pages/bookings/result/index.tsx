@@ -1,16 +1,14 @@
-import { Box, Button, Flex, Spinner, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Text } from '@chakra-ui/react'
 import { NextPage } from 'next'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import useSWR from 'swr'
-import Layout from '../../../components/base/layout'
-import ErrorCard from '../../../components/cards/errorCard'
-import { CircleCheckIcon } from '../../../components/icons/menuIcons'
-import ThanksPageImage from '../../../components/images/thanksPageImage'
-import LoadingSpinner from '../../../components/loadingSpinner'
-import { postSingle } from '../../../utils/crudUtil'
+import Layout from '../../../customs/components/base/layout'
+import ErrorCard from '../../../customs/components/cards/errorCard'
+import { CircleCheckIcon } from '../../../customs/icons/menuIcons'
+import ThanksPageImage from '../../../customs/components/images/thanksPageImage'
+import LoadingSpinner from '../../../customs/components/loadingSpinner'
+import { postSingle } from '@utils/crudUtil'
 
 const ResultPage: NextPage = () => {
   const [loading, setLoading] = useState(false)
