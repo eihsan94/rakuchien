@@ -15,6 +15,7 @@ function CardImage(props: Props) {
                 rounded={'lg'}
                 width="100%"
                 h="100%"
+                bg="beige"
                 objectFit={'cover'}
                 src={src}
                 alt={src}

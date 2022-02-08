@@ -1,7 +1,6 @@
 import {
     Box,
-    Flex,
-    Text,
+    SimpleGrid,
 } from '@chakra-ui/react'
 import React, { FC } from 'react'
 import { BiCloudUpload } from 'react-icons/bi';
@@ -10,9 +9,6 @@ import BookingCard from '../../customs/components/cards/bookingCard';
 import { useCrudHooks } from '../../core/hooks/useCrudHooks';
 import { useI18n } from '../../core/hooks/useI18n';
 import { Booking } from '../../customs/types';
-import Card from '@components/Card/Card';
-import Dashboard from 'core/views/Dashboard/Dashboard';
-
 
 
 const Index: FC = () => {
@@ -26,22 +22,19 @@ const Index: FC = () => {
             {reqLoading &&
                 <Box fontSize={"2em"} color="blue" pos="fixed" zIndex={2} right={"1em"} bottom={{ base: "3em", md: "1em" }}><BiCloudUpload /></Box>
             }
-            <Dashboard />
-            {/* {
-                bookings && <Flex flexWrap={"wrap"} justifyContent={{ base: "center", md: "flex-start" }}>
+            {
+                bookings &&
+                <SimpleGrid pt={{ base: "1em" }} pb={{ base: "5em" }} columns={{ sm: 2, md: 2, lg: 3, xl: 4 }} spacing={{ base: "20px", md: "40px" }}>
                     {bookings.map((b: Booking, i: number) =>
-                        <Card key={i}>
-                            {JSON.stringify(b)}
-                        </Card>
-                        // <BookingCard
-                        //     key={i}
-                        //     booking={b}
-                        //     deleteHandler={deleteHandler}
-                        //     _notLast={{ mr: 8 }}
-                        // />
+                        <BookingCard
+                            key={i}
+                            booking={b}
+                            deleteHandler={deleteHandler}
+                            _notLast={{ mr: 8 }}
+                        />
                     )}
-                </Flex>
-            } */}
+                </SimpleGrid>
+            }
         </Layout>
     )
 }

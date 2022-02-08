@@ -2,6 +2,13 @@
 import { coreTheme } from "core/theme/theme"
 import { globalStyles } from "./styles"
 
+const bookingBtnProps = {
+    fontSize: { base: 'xs', md: 'sm' },
+    rounded: 'full',
+    px: "2em",
+    py: "1em",
+}
+
 const customThemes = {
     ...globalStyles,
     components: {
@@ -26,18 +33,29 @@ const customThemes = {
                     _hover: { bg: "blue.600" },
                 },
                 booking: {
-                    fontSize: 'sm',
-                    rounded: 'full',
+                    ...bookingBtnProps,
+                    boxShadow: '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)',
                     bg: 'blue.400',
                     color: 'white',
-                    boxShadow: '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)',
                     _hover: {
                         bg: 'blue.500',
                     },
                     _focus: {
                         bg: 'blue.500',
                     },
-                }
+                },
+                cancelBooking: {
+                    ...bookingBtnProps,
+                    bg: 'gray.200',
+                    color: 'black',
+                    _hover: {
+                        bg: 'red.100',
+                        color: "red.500"
+                    },
+                    _focus: {
+                        bg: 'red.500',
+                    },
+                },
             },
         },
         Text: {
