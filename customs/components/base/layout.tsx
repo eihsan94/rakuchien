@@ -8,10 +8,10 @@ import React, { FC } from 'react'
 import LoadingSpinner from '../loadingSpinner'
 
 export interface LayoutProps {
-    title: string
+    title?: string
     error?: ErrorProps
     loading?: boolean
-    description: string
+    description?: string
     breadCrumbLinks?: BreadCrumbLinks[]
 
 }
@@ -20,7 +20,7 @@ const Layout: FC<LayoutProps> = ({ title, description, children, error, loading,
     const size = "20px"
     const menus: MenuProps[] = [
         { label: "Home", icon: <HomeIcon h={size} w={size} />, href: '/home' },
-        { label: "Lesson", icon: <LessonIcon h={size} w={size} />, href: '/lessons' },
+        { label: "Course", icon: <LessonIcon h={size} w={size} />, href: '/courses' },
         { label: "Booking", icon: <BookingIcon h={size} w={size} />, href: '/bookings' },
     ]
     return (
@@ -30,7 +30,7 @@ const Layout: FC<LayoutProps> = ({ title, description, children, error, loading,
 
                 <Box overflow={{ base: "auto", md: "auto" }} h={{ base: "100%", md: "100vh" }} w="100%">
                     <Box px={{ base: "30px", md: "12" }} py={{ base: "4", md: "6" }}>
-                        <Text as="h1" fontSize={"5xl"} fontWeight={"bold"} textTransform={"capitalize"}>{title}</Text>
+                        <Text as="h1" fontSize={["4xl", "5xl"]} fontWeight={"bold"} textTransform={"capitalize"}>{title}</Text>
                         <Text as="h6" fontSize={"sm"} color="gray.500">{description}</Text>
                         {breadCrumbLinks && <BreadCrumbs links={breadCrumbLinks} mt="10px" textTransform={"capitalize"} fontWeight={"600"} color={primaryColorHex} />}
                     </Box>

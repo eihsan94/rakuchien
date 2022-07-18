@@ -73,7 +73,7 @@ const HeroSubtitle = (props: BoxProps) => (
  * @returns CTA BTN
  */
 const CTABtn = () => (
-    <NextLink href='/lessons'>
+    <NextLink href='/courses'>
         <Box
             px="60px"
             py="20px"

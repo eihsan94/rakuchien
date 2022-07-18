@@ -120,6 +120,21 @@
         "comment": ""
     },
     {
+        "label": "COURSES_PAGE_TITLE",
+        "en": "Courses",
+        "ja": "コース",
+        "zh-hans": "简体中文",
+        "zh-hant": "繁體中文",
+        "ko": "한국어",
+        "es": "Español",
+        "fr": "Français",
+        "de": "Deutsch",
+        "ru": "русский",
+        "pt": "Português",
+        "pt-br": "Portugues do Brasil",
+        "comment": ""
+    },
+    {
         "label": "BOOKINGS_PAGE_TITLE",
         "en": "Bookings",
         "ja": "ブッキング",

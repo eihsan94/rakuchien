@@ -69,7 +69,7 @@ const LessonBookingModal: FC<Props> = ({ isOpen, onClose, lesson }) => {
     } else {
       protoPreBooking.dates.push(s.date)
     }
-    protoPreBooking.totalPrice = lesson.price * protoPreBooking.dates.length
+    // protoPreBooking.totalPrice = lesson.price * protoPreBooking.dates.length
     setPreBooking(protoPreBooking)
   }
   const onReset = () => {
@@ -179,7 +179,7 @@ const LessonBookingModal: FC<Props> = ({ isOpen, onClose, lesson }) => {
             {JPY(preBooking.totalPrice).format()}
           </Text>
           <Text fontWeight={"normal"} color="gray.500" fontSize={"15px"}>
-            {JPY(lesson.price).format()} per lesson
+            {/* {JPY(lesson.price).format()} per lesson */}
           </Text>
         </ModalHeader>
         <ModalCloseButton />
