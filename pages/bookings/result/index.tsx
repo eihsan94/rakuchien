@@ -17,10 +17,10 @@ const ResultPage: NextPage = () => {
   useEffect(() => {
     (async () => {
       setLoading(true)
-      const bookingItems = JSON.parse(localStorage.getItem("bookingItems") as string)
-      if (bookingItems) {
+      const bookingItem = JSON.parse(localStorage.getItem("bookingItem") as string)
+      if (bookingItem) {
         try {
-          await postSingle('bookings/batch', bookingItems)
+          await postSingle('bookings', bookingItem)
         } catch (err) {
           setError(JSON.stringify(err))
         }

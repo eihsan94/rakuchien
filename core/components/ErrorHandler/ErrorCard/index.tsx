@@ -31,7 +31,7 @@ const ErrorAction = ({ status }: { status: number }) => {
     const actionBtn = () => {
         switch (status) {
             case 401:
-                return <Button colorScheme={"red"} onClick={() => signIn('google', { callbackUrl: router.pathname })}>Log in</Button>
+                return <Button colorScheme={"red"} onClick={() => signIn('google', { callbackUrl: router.asPath })}>Log in</Button>
 
             default:
                 return <Button colorScheme={"red"} onClick={() => router.back()}>Go back</Button>

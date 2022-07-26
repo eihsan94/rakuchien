@@ -29,6 +29,7 @@ export const COURSE_QUERY = `
             url
         }
     }
+    url
 `
 export const COURSE_LESSON_QUERY = `
     lessonsCollection {

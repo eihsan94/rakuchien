@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client'
-import { Text, Box, Heading, VStack, Wrap, WrapItem, Image, Button, HStack, Divider, Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel } from '@chakra-ui/react'
+import { Text, Box, Heading, VStack, Wrap, WrapItem, Image, Button, HStack, Divider, Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, useDisclosure } from '@chakra-ui/react'
 import Card from '@components/Card/Card'
 import CRender from '@components/CRender'
 import { JPY } from '@utils/currencyUtils'
-import { fmtDate } from '@utils/dateUtils'
+import { fmtDate, fmtDay, fmtTime } from '@utils/dateUtils'
 import { graphqlClient } from '@utils/gqlClient'
 import Layout from 'customs/components/base/layout'
 import CourseAuthor from 'customs/components/courseAurhors'
@@ -13,22 +13,39 @@ import { Course, Lesson } from 'customs/types'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { getCourseByIdQuery } from '@queries/courseQuery'
 import React, { FC, useEffect, useState } from 'react'
+import { getSession, signIn, useSession } from 'next-auth/react'
+import { Session } from 'next-auth'
+import { useRouter } from 'next/router'
+import CourseBookingModal from 'customs/components/modals/courseBookingModal'
 
 interface Props {
     course: Course
 }
 
 function Course({ course }: Props) {
+    const { data: session, status } = useSession()
+
     const { title, description, teacher, imagesCollection, categories, requirements, price, lessonsCollection } = course
     const [cTitle, setCTitle] = useState("")
     const { width } = useWindowSize()
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
+    const router = useRouter()
+    const enrollHandler = () => {
+        if (status === "unauthenticated") {
+            signIn('google', { callbackUrl: router.asPath })
+        } else {
+            onOpen()
+        }
+
+    }
     useEffect(() => {
         if (width > 600) {
             setCTitle(title)
         }
     }, [title, width])
     const EnrollElement = <HStack mt="1em" w="100%">
-        <Button mr="auto">
+        <Button mr="auto" onClick={enrollHandler}>
             Enroll now!🤞🏼
         </Button>
         <Text fontSize='2xl' fontWeight={"bold"} pr="1em">
@@ -48,6 +65,7 @@ function Course({ course }: Props) {
                     </Heading>
                     {EnrollElement}
                 </Card>
+                <CourseBookingModal isOpen={isOpen} onClose={onClose} course={course} />
                 <Wrap spacing="30px" marginTop="5">
                     <WrapItem width={{ base: '100%', sm: '100%', md: '45%', lg: '30%' }}>
                         <Box w="100%">
@@ -101,8 +119,12 @@ const Lessons: FC<{ lessons: Lesson[] }> = ({ lessons }) => {
                                     {/* 1. need to putthe schedule and shit
                                     2. connect the enroll now button to payment and registration and shit */}
                                     {name}
-                                    <Text mt="1em" fontSize={"xs"} color="rgba(0,0,0,.5)">
+                                    <Text mt="1em" fontSize={"xs"} opacity={".5"}>
+                                        <Text as="span" mr="5px">
+                                            {fmtDay(startDate)}
+                                        </Text>
                                         {fmtDate(startDate)}
+                                        {fmtTime(startDate)}
                                     </Text>
                                 </Box>
                                 <AccordionIcon />
@@ -124,7 +146,7 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
     const course = await getCourseByIdQuery(`${id}`)
     return {
         props: {
-            course
+            course,
         },
         revalidate: 10, // In seconds
     }

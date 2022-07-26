@@ -33,8 +33,9 @@ interface Props extends BoxProps {
 }
 
 const BookingCard: FC<Props> = ({ booking, deleteHandler, ...props }) => {
-  const { lesson, date, pk } = booking
-  const { image, name } = lesson
+  const { course, pk } = booking
+  const { imagesCollection, title, lessonsCollection } = course
+  const date = lessonsCollection.items[0].startDate
   const imgSize = { base: "4em", md: "5em" }
   const { isOpen, onOpen, onClose } = useDisclosure()
   const toaster = useToast()
@@ -44,11 +45,11 @@ const BookingCard: FC<Props> = ({ booking, deleteHandler, ...props }) => {
       boxShadow: "xl"
     }}>
       <Flex align={'center'}>
-        <CardImage src={image} w={imgSize} h={imgSize} />
+        <CardImage src={imagesCollection.items[0].url} w={imgSize} h={imgSize} />
         <Flex ml={"1em"} flexWrap={"wrap"} direction="column" fontSize={{ base: "sm", md: "md" }} w={{ base: "56%", md: "50%" }} >
           <Box fontSize="1em" w="100%">
             <Text fontWeight={"bold"} w="100%" overflow={"hidden"} whiteSpace="nowrap" textOverflow={"ellipsis"}>
-              {name}
+              {title}
             </Text>
             <Text>{fmtDate(date)}</Text>
             <Text >{fmtTime(date)}</Text>

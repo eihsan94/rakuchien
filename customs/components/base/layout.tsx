@@ -19,7 +19,7 @@ export interface LayoutProps {
 const Layout: FC<LayoutProps> = ({ title, description, children, error, loading, breadCrumbLinks }) => {
     const size = "20px"
     const menus: MenuProps[] = [
-        { label: "Home", icon: <HomeIcon h={size} w={size} />, href: '/home' },
+        // { label: "Home", icon: <HomeIcon h={size} w={size} />, href: '/home' },
         { label: "Course", icon: <LessonIcon h={size} w={size} />, href: '/courses' },
         { label: "Booking", icon: <BookingIcon h={size} w={size} />, href: '/bookings' },
     ]

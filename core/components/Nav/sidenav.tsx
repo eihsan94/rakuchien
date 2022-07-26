@@ -9,7 +9,7 @@ import {
     Tooltip,
     useColorModeValue,
 } from "@chakra-ui/react"
-import { HomeIcon, DashboardIcon, UserIcon } from "@components/Icons/Icons"
+import { UserIcon } from "@components/Icons/Icons"
 import NextLink from "@components/NextLink"
 import { Separator } from "@components/Separator/Separator"
 import { primaryColorHex, primaryColorRgba } from "customs/theme/styles"
@@ -27,7 +27,7 @@ export interface MenuProps extends BoxProps {
 
 const Menu: FC<MenuProps> = ({ label, icon, href, ...otherProps }) => {
     const router = useRouter()
-    const selected = router.pathname === href
+    const selected = router.asPath === href
     const selectedIconProps = {
         bg: selected ? primaryColorHex : "transparent",
         color: useColorModeValue(selected ? "white" : "black", "white"),
@@ -83,7 +83,7 @@ const UserMenu = (props: BoxProps) => {
         if (status === "authenticated") {
             router.push('/settings')
         } else {
-            signIn('google', { callbackUrl: router.pathname })
+            signIn('google', { callbackUrl: router.asPath })
         }
 
     }

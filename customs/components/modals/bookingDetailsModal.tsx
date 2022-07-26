@@ -28,8 +28,9 @@ import ScheduleItem from '../scheduleItem'
 import LoadingSpinner from '../loadingSpinner'
 import { JPY } from '@utils/currencyUtils'
 import { fmtDay, fmtDate, fmtTime } from '@utils/dateUtils'
-import { json } from 'stream/consumers'
 import CardImage from '../cards/cardImage'
+import CRender from '@components/CRender'
+import { useRouter } from 'next/router'
 
 const primary = "#6441F1"
 
@@ -42,8 +43,13 @@ interface Props {
 
 
 const BookingDetailsModal: FC<Props> = ({ isOpen, onClose, booking, onBookingCancel }) => {
-  const { date, totalPrice, lesson } = booking
-  const { name, image, description } = lesson
+  const router = useRouter()
+  const { totalPrice, course } = booking
+  const { title, imagesCollection, description, lessonsCollection } = course
+
+  const date = lessonsCollection.items[0].startDate
+  const image = imagesCollection.items[0].url
+
   const onCloseModal = () => {
     onClose()
   }
@@ -54,7 +60,7 @@ const BookingDetailsModal: FC<Props> = ({ isOpen, onClose, booking, onBookingCan
       <ModalContent>
         <ModalHeader>
           <Text>
-            {name} Booking
+            {title} Booking
           </Text>
           <Text>
             {fmtDate(date)}
@@ -63,7 +69,7 @@ const BookingDetailsModal: FC<Props> = ({ isOpen, onClose, booking, onBookingCan
         <ModalCloseButton />
         <ModalBody>
           <Flex direction={{ base: "column", md: "row" }}>
-            <CardImage src={image} h="10em" w="10em" />
+            <CardImage border={"1px solid rgba(0,0,0,.1)"} src={image} h="100%" w="100%" />
             <Box ml="1em">
               <Box>
                 <Text fontWeight={"semibold"}>Price</Text>
@@ -71,7 +77,21 @@ const BookingDetailsModal: FC<Props> = ({ isOpen, onClose, booking, onBookingCan
               </Box>
               <Box>
                 <Text fontWeight={"semibold"}>Description</Text>
-                <Text>{description}</Text>
+                {description &&
+                  <Box
+                    as={"p"}
+                    display="-webkit-box"
+                    maxW="90%"
+                    overflow="hidden"
+                    __css={{
+                      "-webkit-line-clamp": "3",
+                      "-webkit-box-orient": "vertical",
+                    }}
+                  >
+                    <CRender json={description.json} />
+                  </Box>
+
+                }
               </Box>
             </Box>
           </Flex>
@@ -80,8 +100,8 @@ const BookingDetailsModal: FC<Props> = ({ isOpen, onClose, booking, onBookingCan
           <Button variant="cancelBooking" onClick={onBookingCancel} mr="1em">
             Cancel Booking
           </Button>
-          <Button variant="primary" onClick={onClose} >
-            Add to Gcal
+          <Button variant="primary" onClick={() => router.push(course.url)} >
+            Join the lesson
           </Button>
         </ModalFooter>
       </ModalContent>

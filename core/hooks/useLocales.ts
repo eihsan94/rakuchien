@@ -9,7 +9,7 @@ export const useLocales = (): UseLocalesResult => {
   const router = useRouter()
   const handleLocale = (next: string) => {
     router.push(
-      { pathname: router.pathname, query: router.query },
+      { pathname: router.asPath, query: router.query },
       router.asPath,
       { locale: next }
     )

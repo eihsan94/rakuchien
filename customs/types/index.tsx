@@ -42,6 +42,7 @@ export interface Course {
     };
     price: number;
     teacher: Teacher;
+    url: string
 }
 
 export interface Schedule {
@@ -72,20 +73,8 @@ export interface Category {
 
 export interface Booking {
     pk?: string
-    date: string
     totalPrice: number
-    lesson: {
-        id: string
-        name: string
-        description: string
-        image: string
-        url: string
-        teacher: {
-            id: string
-            name: string
-            image: string
-        }
-    }
+    course: Course
 }
 
 export interface PreBooking {

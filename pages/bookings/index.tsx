@@ -38,7 +38,6 @@ import NextLink from '@components/NextLink';
 
 const BookingTable: FC<{ bookings: Booking[] }> = ({ bookings }) => {
     const textColor = useColorModeValue("gray.700", "white");
-
     return (
         <Card overflow={{ sm: "scroll" }}>
             <CardHeader p="6px 0px 22px 0px">
@@ -63,7 +62,7 @@ const BookingTable: FC<{ bookings: Booking[] }> = ({ bookings }) => {
                                 <Tr key={i}>
                                     <Td minWidth={{ sm: "230px" }} pl="0px">
                                         <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
-                                            <Avatar src={row.lesson.image} w="50px" borderRadius="12px" me="18px" />
+                                            <Avatar src={row.course.teacher.image.url} w="50px" borderRadius="12px" me="18px" />
                                             <Flex direction="column">
                                                 <Text
                                                     fontSize="md"
@@ -71,20 +70,18 @@ const BookingTable: FC<{ bookings: Booking[] }> = ({ bookings }) => {
                                                     fontWeight="bold"
                                                     minWidth="100%"
                                                 >
-                                                    {row.lesson.name}
+                                                    {row.course.title}
                                                 </Text>
                                             </Flex>
                                         </Flex>
                                     </Td>
                                     <Td minWidth={"300px"}>
-                                        <Flex align={"center"} fontSize="sm"
-                                            color={textColor}>
-                                            <Text fontWeight="bold" >{fmtDate(row.date)}</Text>
-                                            （{fmtTime(row.date)}）
-                                            <Text ml="10px" variant='dayLabel'>
-                                                {fmtDay(row.date)}
-                                            </Text>
-                                        </Flex>
+                                        {row.course.lessonsCollection.items.map(({ startDate }, i) =>
+                                            <Flex key={i} align={"center"} fontSize="xs" color={textColor}>
+                                                <Text fontWeight="bold" >{fmtDate(startDate)} {fmtDay(startDate)}</Text>
+                                                （{fmtTime(startDate)}）
+                                            </Flex>
+                                        )}
                                     </Td>
                                     <Td>
                                         <Text
@@ -107,12 +104,12 @@ const BookingTable: FC<{ bookings: Booking[] }> = ({ bookings }) => {
 }
 
 const NearestBookings: FC<{ bookings: Booking[], deleteHandler: (pk: string, successToastOptions: UseToastOptions) => Promise<void> }> = ({ bookings, deleteHandler }) => {
-    const displayBookings = bookings.sort((a, b) => (new Date(b.date) as any) - (new Date(a.date) as any)) // sort booking by the latest date
+    // const displayBookings = bookings.sort((a, b) => (new Date(b.date) as any) - (new Date(a.date) as any)) // sort booking by the latest date
     return (
         <Box>
             <Text variant="pageSectionTitle">Next Lessons</Text>
             <SimpleGrid w="100%" pt={{ base: "1em" }} pb={{ base: "5em" }} columns={{ sm: 1, md: 2, lg: 2, xl: 2 }} spacing={"20px"}>
-                {displayBookings.map((b: Booking, i: number) =>
+                {bookings.map((b: Booking, i: number) =>
                     <BookingCard
                         key={i}
                         booking={b}
@@ -128,9 +125,9 @@ const NearestBookings: FC<{ bookings: Booking[], deleteHandler: (pk: string, suc
 const Index: FC = () => {
     const { data: bookings, loading, error, reqLoading, deleteHandler } = useCrudHooks('bookings')
     const { translate } = useI18n()
-    if (bookings) {
-        bookings.sort((a: Booking, b: Booking) => (new Date(b.date) as any) - (new Date(a.date) as any)) // sort booking by the latest date
-    }
+    // if (bookings) {
+    //     bookings.sort((a: Booking, b: Booking) => (new Date(b.date) as any) - (new Date(a.date) as any)) // sort booking by the latest date
+    // }
     return (
         <Layout title={translate('BOOKINGS_PAGE_TITLE')} description="Don't miss it 😉" loading={loading} error={error}>
             {reqLoading &&
@@ -149,9 +146,9 @@ const Index: FC = () => {
                             <Text>
                                 You have no booking now
                             </Text>
-                            <NextLink href="/lessons">
+                            <NextLink href="/courses">
                                 <Button variant="solid" mt="1em">
-                                    Book new lessons
+                                    Book new courses
                                 </Button>
                             </NextLink>
                         </Box>
